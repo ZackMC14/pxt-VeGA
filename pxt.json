@@ -1,0 +1,14 @@
+{
+    "name": "MarkI",
+    "version": "0.0.1",
+    "description": "14",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts"
+    ],
+    "public": true
+}
