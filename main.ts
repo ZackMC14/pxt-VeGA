@@ -19,30 +19,14 @@ namespace sensors {
         m1Dir: Direction, m2Dir: Direction, m3Dir: Direction, m4Dir: Direction,
         m1Speed: number, m2Speed: number, m3Speed: number, m4Speed: number
     ): void {
-
-        // M1: เดิม ใช้แค่ 1 พินทิศทาง + PWM
         pins.digitalWritePin(DigitalPin.P1, m1Dir == Direction.Clockwise ? 1 : 0)
-        pins.analogWritePin(AnalogPin.P8, m1Dir == Direction.Stop ? 0 : pins.map(m1Speed, 0, 255, 0, 1023))
-
-        // M2: ใช้ 2 พินควบคุมทิศทาง (P2 และ P12)
-        if (m2Dir == Direction.Clockwise) {
-            pins.digitalWritePin(DigitalPin.P2, 1)
-            pins.digitalWritePin(DigitalPin.P12, 0)
-        } else if (m2Dir == Direction.CounterClockwise) {
-            pins.digitalWritePin(DigitalPin.P2, 0)
-            pins.digitalWritePin(DigitalPin.P12, 1)
-        } else { // Stop
-            pins.digitalWritePin(DigitalPin.P2, 0)
-            pins.digitalWritePin(DigitalPin.P12, 0)
-        }
-        pins.analogWritePin(AnalogPin.P12, m2Dir == Direction.Stop ? 0 : pins.map(m2Speed, 0, 255, 0, 1023))
-
-        // M3
+        pins.digitalWritePin(DigitalPin.P2, m2Dir == Direction.Clockwise ? 1 : 0)
         pins.digitalWritePin(DigitalPin.P13, m3Dir == Direction.Clockwise ? 1 : 0)
-        pins.analogWritePin(AnalogPin.P14, m3Dir == Direction.Stop ? 0 : pins.map(m3Speed, 0, 255, 0, 1023))
-
-        // M4
         pins.digitalWritePin(DigitalPin.P15, m4Dir == Direction.Clockwise ? 1 : 0)
+
+        pins.analogWritePin(AnalogPin.P8, m1Dir == Direction.Stop ? 0 : pins.map(m1Speed, 0, 255, 0, 1023))
+        pins.analogWritePin(AnalogPin.P12, m2Dir == Direction.Stop ? 0 : pins.map(m2Speed, 0, 255, 0, 1023))
+        pins.analogWritePin(AnalogPin.P14, m3Dir == Direction.Stop ? 0 : pins.map(m3Speed, 0, 255, 0, 1023))
         pins.analogWritePin(AnalogPin.P16, m4Dir == Direction.Stop ? 0 : pins.map(m4Speed, 0, 255, 0, 1023))
     }
 }
